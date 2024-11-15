@@ -17,3 +17,10 @@ img {
   align-items: center;
   gap: 20px;
 }
+
+
+@media (max-width:425px) {
+  .container-buttons{
+    display: none;
+  }
+}

@@ -11,13 +11,13 @@ const NewsApp = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=india&apiKey=${
+          `https://newsapi.org/v2/top-headlines?country=us&apiKey=${
             import.meta.env.VITE_API_KEY
           }`
         );
         const jsonData = await response.json();
         // console.log(jsonData);
-        setNewsData(jsonData.articles.slice(0, 21));
+        setNewsData(jsonData.articles.slice(0, 13));
       } catch (error) {
         console.log(error);
       }
@@ -28,13 +28,13 @@ const NewsApp = () => {
   const getData = async () => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${input}&apiKey=${
+        `https://newsapi.org/v2/top-headlines?q=${input}&apiKey=${
           import.meta.env.VITE_API_KEY
         }`
       );
       const jsonData = await response.json();
       // console.log(jsonData);
-      setNewsData(jsonData.articles.slice(0, 21));
+      setNewsData(jsonData.articles.slice(0, 13));
     } catch (error) {
       console.log(error);
     }
@@ -43,13 +43,13 @@ const NewsApp = () => {
   const getCategoryData = async (category) => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${category}&apiKey=${
+        `https://newsapi.org/v2/top-headlines?q=${category}&apiKey=${
           import.meta.env.VITE_API_KEY
         }`
       );
       const jsonData = await response.json();
       // console.log(jsonData);
-      setNewsData(jsonData.articles.slice(0, 21));
+      setNewsData(jsonData.articles.slice(0, 13));
     } catch (error) {
       console.log(error);
     }

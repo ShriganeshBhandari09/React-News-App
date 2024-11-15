@@ -11,13 +11,12 @@ const NewsApp = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=${
+          `https://gnews.io/api/v4/top-headlines?country=in&lang=en&apikey=${
             import.meta.env.VITE_API_KEY
           }`
         );
         const jsonData = await response.json();
-        // console.log(jsonData);
-        setNewsData(jsonData.articles.slice(0, 13));
+        setNewsData(jsonData.articles);
       } catch (error) {
         console.log(error);
       }
@@ -28,13 +27,13 @@ const NewsApp = () => {
   const getData = async () => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?q=${input}&apiKey=${
+        `https://gnews.io/api/v4/search?q=${input}&apikey=${
           import.meta.env.VITE_API_KEY
         }`
       );
       const jsonData = await response.json();
       // console.log(jsonData);
-      setNewsData(jsonData.articles.slice(0, 13));
+      setNewsData(jsonData.articles);
     } catch (error) {
       console.log(error);
     }
@@ -43,13 +42,13 @@ const NewsApp = () => {
   const getCategoryData = async (category) => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?q=${category}&apiKey=${
+        `https://gnews.io/api/v4/top-headlines?country=us&lang=en&category=${category}&apikey=${
           import.meta.env.VITE_API_KEY
         }`
       );
       const jsonData = await response.json();
-      // console.log(jsonData);
-      setNewsData(jsonData.articles.slice(0, 13));
+      console.log(jsonData);
+      setNewsData(jsonData.articles);
     } catch (error) {
       console.log(error);
     }
@@ -94,10 +93,37 @@ const NewsApp = () => {
           type="button"
           className="btn btn-primary"
           onClick={() => {
+            getCategoryData("World");
+          }}
+        >
+          World
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Nation");
+          }}
+        >
+          Nation
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
             getCategoryData("Business");
           }}
         >
           Business
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Technology");
+          }}
+        >
+          Technology
         </button>
         <button
           type="button"
@@ -112,10 +138,10 @@ const NewsApp = () => {
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            getCategoryData("Health");
+            getCategoryData("Sports");
           }}
         >
-          Health
+          Sports
         </button>
         <button
           type="button"
@@ -130,24 +156,15 @@ const NewsApp = () => {
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            getCategoryData("Sports");
+            getCategoryData("Health");
           }}
         >
-          Sports
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => {
-            getCategoryData("Technology");
-          }}
-        >
-          Technology
+          Health
         </button>
       </div>
       <div className="card-container">
         {newsData.map((item, index) => {
-          if (!item.urlToImage) {
+          if (!item.image) {
             return null;
           } else {
             return (
@@ -163,7 +180,7 @@ const NewsApp = () => {
                     ? item.description.slice(0, 90).concat("...")
                     : item.description
                 }
-                img={item.urlToImage}
+                img={item.image}
                 url={item.url}
               />
             );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NewsCard from "./NewsCard";
 // import Navbar from "./Navbar";
+import newspaper from "../assets/newspaper.png";
 
 const NewsApp = () => {
   const [newsData, setNewsData] = useState([]);
@@ -56,9 +57,12 @@ const NewsApp = () => {
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary">
+      <nav className="navbar">
         <div className="container-fluid">
-          <a className="navbar-brand">News App</a>
+          <a className="navbar-brand logo" href="#">
+            <img src={newspaper} alt="" />
+            INSTA NEWS
+          </a>
           <div className="d-flex">
             <input
               className="form-control me-2"
@@ -67,18 +71,14 @@ const NewsApp = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
-            <button
-              className="btn btn-outline-success"
-              onClick={getData}
-              type="button"
-            >
+            <button className="btn btn-primary" onClick={getData} type="button">
               Search
             </button>
           </div>
         </div>
       </nav>
 
-      <h1 className="text-center">Latest News</h1>
+      <h1 className="text-center py-3">Latest News</h1>
 
       <div className="container-buttons">
         <button
@@ -153,8 +153,16 @@ const NewsApp = () => {
             return (
               <NewsCard
                 key={index}
-                title={item.title}
-                description={item.description}
+                title={
+                  item.title.length > 50
+                    ? item.title.slice(0, 40).concat("...")
+                    : item.title
+                }
+                description={
+                  item.description.length > 100
+                    ? item.description.slice(0, 90).concat("...")
+                    : item.description
+                }
                 img={item.urlToImage}
                 url={item.url}
               />

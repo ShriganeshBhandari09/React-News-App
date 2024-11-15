@@ -1,14 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
 body {
-  background-color: #f7efe5;
+  background-color: #242729;
 }
 
-.btn {
-  background-color: #674188;
+.navbar {
+  background-color: #292f33;
+  padding: 20px 40px;
+}
+.navbar-brand {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.btn:hover{
+.logo {
+  font-family: "Oswald";
+  font-weight: 900;
+  color: white;
+}
+
+.btn:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -17,7 +29,7 @@ body {
   justify-content: center;
   gap: 41px;
   flex-wrap: wrap;
-  margin: 20px 0px;
+  margin: 40px 0px;
 }
 
 .news-image {
@@ -31,19 +43,30 @@ body {
   gap: 20px;
 }
 
-.navbar {
-  background-color: #e2bfd9;
-  padding: 20px 40px;
-}
-.navbar-brand {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+.card {
+  transition: all 0.5s ease;
+  background-color: #292f33;
+  color: #fff;
 }
 
-.logo {
-  font-family: "Oswald";
-  font-weight: 900;
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-title {
+  font-weight: 700;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 @media (max-width: 425px) {

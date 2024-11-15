@@ -17,7 +17,7 @@ const NewsApp = () => {
         );
         const jsonData = await response.json();
         // console.log(jsonData);
-        setNewsData(jsonData.articles);
+        setNewsData(jsonData.articles.slice(0, 21));
       } catch (error) {
         console.log(error);
       }
@@ -34,7 +34,7 @@ const NewsApp = () => {
       );
       const jsonData = await response.json();
       // console.log(jsonData);
-      setNewsData(jsonData.articles);
+      setNewsData(jsonData.articles.slice(0, 21));
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +49,7 @@ const NewsApp = () => {
       );
       const jsonData = await response.json();
       // console.log(jsonData);
-      setNewsData(jsonData.articles);
+      setNewsData(jsonData.articles.slice(0, 21));
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +78,7 @@ const NewsApp = () => {
         </div>
       </nav>
 
-      <h1 className="text-center py-3">Latest News</h1>
+      <h1 className="text-center py-3 text-white">Latest News</h1>
 
       <div className="container-buttons">
         <button

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import NewsCard from "./NewsCard";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 
 const NewsApp = () => {
   const [newsData, setNewsData] = useState([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,12 +23,46 @@ const NewsApp = () => {
     };
     fetchData();
   }, []);
-  console.log(newsData);
+
+  const getData = async () => {
+    try {
+      const response = await fetch(
+        `https://newsapi.org/v2/everything?q=${input}&apiKey=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      const jsonData = await response.json();
+      // console.log(jsonData);
+      setNewsData(jsonData.articles);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <Navbar />
+      <nav className="navbar bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand">News App</a>
+          <div className="d-flex">
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button
+              className="btn btn-outline-success"
+              onClick={getData}
+              type="button"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </nav>
       <h1 className="text-center">Latest News</h1>
-
       <div className="card-container">
         {newsData.map((item, index) => {
           if (!item.urlToImage) {

@@ -1,6 +1,17 @@
+import { useState } from "react";
+
 const Navbar = () => {
+  const [input, setInput] = useState("");
 
-
+  async function fetchData() {
+    const response = await fetch(
+      `https://newsapi.org/v2/everything?q=${input}&apiKey=${
+        import.meta.env.VITE_API_KEY
+      }`
+    );
+    const jsonData = await response.json()
+    console.log(jsonData)
+  }
   return (
     <>
       <nav className="navbar bg-body-tertiary">
@@ -11,9 +22,10 @@ const Navbar = () => {
               className="form-control me-2"
               type="search"
               placeholder="Search"
-              aria-label="Search"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success" onClick={fetchData} type="button">
               Search
             </button>
           </div>

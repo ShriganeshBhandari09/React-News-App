@@ -39,6 +39,21 @@ const NewsApp = () => {
     }
   };
 
+  const getCategoryData = async (category) => {
+    try {
+      const response = await fetch(
+        `https://newsapi.org/v2/everything?q=${category}&apiKey=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      const jsonData = await response.json();
+      // console.log(jsonData);
+      setNewsData(jsonData.articles);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <nav className="navbar bg-body-tertiary">
@@ -62,7 +77,74 @@ const NewsApp = () => {
           </div>
         </div>
       </nav>
+
       <h1 className="text-center">Latest News</h1>
+
+      <div className="container-buttons">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("General");
+          }}
+        >
+          General
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Business");
+          }}
+        >
+          Business
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Entertainment");
+          }}
+        >
+          Entertainment
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Health");
+          }}
+        >
+          Health
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Science");
+          }}
+        >
+          Science
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Sports");
+          }}
+        >
+          Sports
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            getCategoryData("Technology");
+          }}
+        >
+          Technology
+        </button>
+      </div>
       <div className="card-container">
         {newsData.map((item, index) => {
           if (!item.urlToImage) {
